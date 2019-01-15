@@ -17,7 +17,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 public class DataSourceConfig {
 	
 	@Bean("dataSource")
-	@ConfigurationProperties(prefix="spring.user.server.datasource")
+	@ConfigurationProperties(prefix="spring.resource.server.datasource")
 	public DataSource getDataSource() {
 		return DataSourceBuilder.create(BasicDataSource.class.getClassLoader()).build();
 	}

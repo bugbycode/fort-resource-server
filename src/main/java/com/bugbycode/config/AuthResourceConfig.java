@@ -37,8 +37,21 @@ public class AuthResourceConfig extends ResourceServerConfigurerAdapter {
         .antMatchers("/resource/delete").hasRole("RESOURCE_DELETE")  //删除资产权限
         
         .antMatchers("/resource/query","/resource/queryById","/resource/queryByName",
-        		"/resource/queryByIp","/resouce/queryAccountByResourceId")
+        		"/resource/queryByIp","/resource/queryNetWork","/account/query")
         	.hasAnyRole("RESOURCE_QUERY","RESOURCE_UPDATE",
-        		"RESOURCE_INSERT","RESOURCE_DELETE");
+        		"RESOURCE_INSERT","RESOURCE_DELETE")
+        	
+        .antMatchers("/account/insert",
+        		"/account/update","/account/delete").hasAnyRole("RESOURCE_UPDATE",
+        		"RESOURCE_INSERT","RESOURCE_DELETE")
+        
+        //网络管理
+        .antMatchers("/network/update").hasRole("NETWORK_UPDATE") //修改网络权限
+        .antMatchers("/network/insert").hasRole("NETWORK_INSERT") //添加网络权限
+        .antMatchers("/network/delete").hasRole("NETWORK_DELETE")  //删除网络权限
+        
+        .antMatchers("/network/query","/network/queryByName","/network/queryById")
+        	.hasAnyRole("NETWORK_QUERY","NETWORK_UPDATE","NETWORK_INSERT","NETWORK_DELETE")
+        ;
     }
 }

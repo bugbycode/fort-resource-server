@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="network">
+	<resultMap type="network" id="networkResult">
+		<result property="id" 			column="id"/>
+		<result property="name" 		column="name"/>
+		<result property="type" 		column="type"/>
+		<result property="description" 	column="description"/>
+		<result property="clientId" 	column="client_id"/>
+		<result property="clientSecret" column="client_secret"/>
+		<result property="createTime" 	column="create_time"/>
+		<result property="updateTime" 	column="update_time"/>
+	</resultMap>
+	<select id="query" parameterType="java.util.HashMap" resultMap="networkResult">
+		<![CDATA[
+			SELECT
+			  `id`,
+			  `name`,
+			  `type`,
+			  `description`,
+			  `client_id`,
+			  `client_secret`,
+			  `create_time`,
+			  `update_time`
+			FROM `network`
+		]]>
+	</select>
+	<select id="count" parameterType="java.util.HashMap" resultType="int">
+		<![CDATA[
+			SELECT COUNT(`id`) FROM `network`
+		]]>
+	</select>
+	<insert id="insert" parameterType="network">
+		<![CDATA[
+			INSERT INTO `network`
+            (`name`,
+             `type`,
+             `description`,
+             `client_id`,
+             `client_secret`,
+             `create_time`)
+	VALUES (#{name},
+	        #{type},
+	        #{description},
+	        #{clientId},
+	        #{clientSecret},
+	        #{createTime})
+		]]>
+		<selectKey keyProperty="id" resultType="java.lang.Integer">
+			<![CDATA[
+				SELECT @@IDENTITY AS id
+			]]>
+		</selectKey>
+	</insert>
+	<update id="update" parameterType="network">
+		<![CDATA[
+			UPDATE `network`
+			SET 
+			  `name` = #{name},
+			  `type` = #{type},
+			  `description` = #{description},
+			  `client_id` = #{clientId},
+			  `client_secret` = #{clientSecret},
+			  `update_time` = #{updateTime}
+			WHERE `id` = #{id}
+		]]>
+	</update>
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			DELETE FROM `network` WHERE `id` = #{id}
+		]]>
+	</delete>
+	<select id="queryById" parameterType="int" resultMap="networkResult">
+		<![CDATA[
+			SELECT
+			  `id`,
+			  `name`,
+			  `type`,
+			  `description`,
+			  `client_id`,
+			  `client_secret`,
+			  `create_time`,
+			  `update_time`
+			FROM `network` WHERE `id` = #{id}
+		]]>
+	</select>
+	<select id="queryByName" parameterType="java.lang.String" resultMap="networkResult">
+		<![CDATA[
+			SELECT
+			  `id`,
+			  `name`,
+			  `type`,
+			  `description`,
+			  `client_id`,
+			  `client_secret`,
+			  `create_time`,
+			  `update_time`
+			FROM `network` WHERE `name` = #{name}
+		]]>
+	</select>
+</mapper>
