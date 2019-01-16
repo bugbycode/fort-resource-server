@@ -9,6 +9,7 @@
 		<result property="password" 		column="password"/>
 		<result property="type" 			column="type"/>
 		<result property="resourceId" 		column="resource_id"/>
+		<result property="serverType" 		column="server_type"/>
 	</resultMap>
 	<select id="query" parameterType="int" resultMap="accountResult">
 		<![CDATA[
@@ -17,7 +18,8 @@
 			  `account`,
 			  `password`,
 			  `type`,
-			  `resource_id`
+			  `resource_id`,
+			  `server_type`
 			FROM `account` WHERE `resource_id` = #{resourceId}
 		]]>
 	</select>
@@ -27,11 +29,13 @@
             (`account`,
              `password`,
              `type`,
-             `resource_id`)
+             `resource_id`,
+			 `server_type`)
 			VALUES (#{account},
 			        #{password},
 			        #{type},
-			        #{resourceId})
+			        #{resourceId},
+			        #{serverType})
 		]]>
 		<selectKey keyProperty="id" resultType="java.lang.Integer">
 			<![CDATA[

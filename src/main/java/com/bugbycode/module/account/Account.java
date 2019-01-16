@@ -18,6 +18,8 @@ public class Account implements Serializable {
 	private int type;
 	
 	private int resourceId;
+	
+	private int serverType;
 
 	public int getId() {
 		return id;
@@ -57,6 +59,14 @@ public class Account implements Serializable {
 
 	public void setResourceId(int resourceId) {
 		this.resourceId = resourceId;
+	}
+
+	public int getServerType() {
+		return serverType;
+	}
+
+	public void setServerType(int serverType) {
+		this.serverType = serverType;
 	}
 
 }

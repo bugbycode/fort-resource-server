@@ -18,4 +18,12 @@ public interface ResourceDao {
 	public Resource queryByName(String name);
 	
 	public List<Resource> queryByIp(String ip);
+	
+	public List<Resource> queryByNetworkId(int networkId);
+	
+	public int insert(Resource r);
+	
+	public int update(Resource r);
+	
+	public int delete(int resId);
 }

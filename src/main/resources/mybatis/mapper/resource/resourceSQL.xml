@@ -106,6 +106,26 @@
 			FROM `resource` r LEFT JOIN `network` n ON r.`network_id` = n.`id` WHERE r.`ip` = #{ip}
 		]]>
 	</select>
+	<select id="queryByNetworkId" parameterType="int" resultMap="resourceResult">
+		<![CDATA[
+			SELECT
+			  r.`id`,
+			  r.`name`,
+			  r.`ip`,
+			  r.`status`,
+			  r.`type`,
+			  r.`os_type`,
+			  r.`use_ssh`,
+			  r.`ssh_port`,
+			  r.`use_rdp`,
+			  r.`rdp_port`,
+			  r.`network_id`,
+			  n.`name` AS network_name,
+			  r.`create_time`,
+			  r.`update_time`
+			FROM `resource` r LEFT JOIN `network` n ON r.`network_id` = n.`id` WHERE r.`network_id` = #{networkId}
+		]]>
+	</select>
 	<insert id="insert" parameterType="resource">
 		<![CDATA[
 			INSERT INTO `resource`
