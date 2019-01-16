@@ -97,7 +97,7 @@
 			  `client_secret`,
 			  `create_time`,
 			  `update_time`
-			FROM `network` WHERE `name` = #{name}
+			FROM `network` WHERE `name` = #{name} LIMIT 1
 		]]>
 	</select>
 </mapper>
