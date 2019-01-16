@@ -26,6 +26,6 @@ public class RegexUtil {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(check(ACCOUNT_REGEX, "abc_dd#"));
+		System.out.println(check(RESOURCE_NAME_REGEX, "aaa.aa@"));
 	}
 }
