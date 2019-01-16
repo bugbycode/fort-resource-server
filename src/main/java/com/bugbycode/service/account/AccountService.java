@@ -13,4 +13,8 @@ public interface AccountService {
 	public int update(Account acc);
 	
 	public void delete(int accId);
+	
+	public Account checkAccount(List<Account> list,Account acc);
+	
+	public Account findById(List<Account> list,int accId);
 }

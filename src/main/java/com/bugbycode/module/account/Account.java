@@ -69,4 +69,12 @@ public class Account implements Serializable {
 		this.serverType = serverType;
 	}
 
+	public void copy(Account acc) {
+		this.setId(acc.getId());
+		this.setAccount(acc.getAccount());
+		this.setPassword(acc.getPassword());
+		this.setType(acc.getType());
+		this.setResourceId(acc.getResourceId());
+		this.setServerType(acc.getServerType());
+	}
 }

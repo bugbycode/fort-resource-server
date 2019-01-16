@@ -39,4 +39,31 @@ public class AccountServiceImpl implements AccountService {
 		accountDao.delete(accId);
 	}
 
+	@Override
+	public Account checkAccount(List<Account> list, Account acc) {
+		if(list == null || list.isEmpty()) {
+			return null;
+		}
+		for(Account a : list) {
+			if(a.getAccount().equals(acc.getAccount()) 
+					&& a.getServerType() == acc.getServerType()) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Account findById(List<Account> list,int accId) {
+		if(list == null || list.isEmpty()) {
+			return null;
+		}
+		for(Account a : list) {
+			if(a.getId() == accId) {
+				return a;
+			}
+		}
+		return null;
+	}
+
 }

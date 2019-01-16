@@ -19,6 +19,11 @@ public class ResourceDaoImpl extends BaseDao implements ResourceDao {
 	}
 
 	@Override
+	public List<Resource> query(Map<String, Object> param){
+		return getSqlSession().selectList("resource.query", param);
+	}
+	
+	@Override
 	public int count(Map<String, Object> param) {
 		return getSqlSession().selectOne("resource.count", param);
 	}

@@ -11,6 +11,8 @@ public interface ResourceDao {
 	
 	public List<Resource> query(Map<String,Object> param,RowBounds rb);
 	
+	public List<Resource> query(Map<String, Object> param);
+	
 	public int count(Map<String,Object> param);
 	
 	public Resource queryById(int id);

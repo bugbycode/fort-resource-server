@@ -35,6 +35,11 @@ public class ResourceServiceImpl implements ResourceService {
 		sr.setPage(page);
 		return sr;
 	}
+	
+	@Override
+	public List<Resource> query(Map<String,Object> param){
+		return resourceDao.query(param);
+	}
 
 	@Override
 	public Resource queryById(int id) {

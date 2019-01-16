@@ -10,6 +10,8 @@ public interface ResourceService {
 	
 	public SearchResult<Resource> query(Map<String,Object> param,int startIndex,int pageSize);
 	
+	public List<Resource> query(Map<String,Object> param);
+	
 	public Resource queryById(int id);
 	
 	public Resource queryByName(String name);
