@@ -35,6 +35,11 @@ public class NetworkServiceImpl implements NetworkService {
 		sr.setPage(page);
 		return sr;
 	}
+	
+	@Override
+	public List<Network> query(Map<String, Object> param){
+		return networkDao.query(param);
+	}
 
 	@Override
 	public Network queryById(int id) {

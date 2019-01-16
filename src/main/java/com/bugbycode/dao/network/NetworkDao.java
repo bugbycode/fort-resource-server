@@ -13,6 +13,8 @@ public interface NetworkDao {
 	
 	public int count(Map<String,Object> param);
 	
+	public List<Network> query(Map<String, Object> param);
+	
 	public Network queryById(int id);
 	
 	public Network queryByName(String name);

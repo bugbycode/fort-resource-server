@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bugbycode.module.network.Network;
 import com.bugbycode.module.resource.Resource;
+import com.bugbycode.service.network.NetworkService;
 import com.bugbycode.service.resource.ResourceService;
 import com.util.StringUtil;
 import com.util.page.SearchResult;
@@ -20,7 +23,11 @@ import com.util.reg.RegexUtil;
 @RequestMapping("/resource")
 public class ResourceController {
 
+	@Autowired
 	private ResourceService resourceService;
+	
+	@Autowired
+	private NetworkService networkService;
 	
 	@RequestMapping("/query")
 	@ResponseBody
@@ -42,6 +49,30 @@ public class ResourceController {
 			json.put("page", sr.getPage());
 		}else {
 			json.put("data", resourceService.query(param));
+		}
+		return json.toString();
+	}
+	
+	@RequestMapping("/queryNetWork")
+	@ResponseBody
+	public String queryNetWork(
+			@RequestParam(name="name",defaultValue="")
+			String name,
+			@RequestParam(name="startIndex",defaultValue="-1")
+			int startIndex,
+			@RequestParam(name="pageSize",defaultValue="10")
+			int pageSize) {
+		JSONObject json = new JSONObject();
+		Map<String,Object> param = new HashMap<String,Object>();
+		if(StringUtil.isNotBlank(name)) {
+			param.put("name", name);
+		}
+		if(startIndex > -1) {
+			SearchResult<Network> sr = networkService.query(param, startIndex, pageSize);
+			json.put("data", sr.getList());
+			json.put("page", sr.getPage());
+		}else {
+			json.put("data", networkService.query(param));
 		}
 		return json.toString();
 	}

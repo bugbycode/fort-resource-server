@@ -26,11 +26,35 @@
 			  `update_time`
 			FROM `network`
 		]]>
+		<where>
+			<if test="keyword != '' and keyword != null">
+				<![CDATA[
+					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+			<if test="name != '' and name != null">
+				<![CDATA[
+					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+		</where>
 	</select>
 	<select id="count" parameterType="java.util.HashMap" resultType="int">
 		<![CDATA[
 			SELECT COUNT(`id`) FROM `network`
 		]]>
+		<where>
+			<if test="keyword != '' and keyword != null">
+				<![CDATA[
+					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+			<if test="name != '' and name != null">
+				<![CDATA[
+					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+		</where>
 	</select>
 	<insert id="insert" parameterType="network">
 		<![CDATA[

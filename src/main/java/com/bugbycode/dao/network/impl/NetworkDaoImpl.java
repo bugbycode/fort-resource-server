@@ -22,6 +22,11 @@ public class NetworkDaoImpl extends BaseDao implements NetworkDao {
 	public int count(Map<String, Object> param) {
 		return getSqlSession().selectOne("network.count", param);
 	}
+	
+	@Override
+	public List<Network> query(Map<String, Object> param){
+		return getSqlSession().selectList("network.query", param);
+	}
 
 	@Override
 	public Network queryById(int id) {

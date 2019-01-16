@@ -38,6 +38,14 @@
 			  r.`update_time`
 			FROM `resource` r LEFT JOIN `network` n ON r.`network_id` = n.`id`
 		]]>
+		<where>
+			<if test="keyword != '' and keyword != null">
+				<![CDATA[
+					AND (r.name LIKE CONCAT('%',#{keyword},'%') OR r.ip LIKE CONCAT('%',#{keyword},'%')
+					 OR n.name LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+		</where>
 	</select>
 	<select id="count" parameterType="java.util.HashMap" resultType="int">
 		<![CDATA[
@@ -45,6 +53,14 @@
 			  COUNT(r.`id`)
 			FROM `resource` r LEFT JOIN `network` n ON r.`network_id` = n.`id`
 		]]>
+		<where>
+			<if test="keyword != '' and keyword != null">
+				<![CDATA[
+					AND (r.name LIKE CONCAT('%',#{keyword},'%') OR r.ip LIKE CONCAT('%',#{keyword},'%')
+					 OR n.name LIKE CONCAT('%',#{keyword},'%'))
+				]]>
+			</if>
+		</where>
 	</select>
 	<select id="queryById" parameterType="int" resultMap="resourceResult">
 		<![CDATA[
