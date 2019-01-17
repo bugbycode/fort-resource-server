@@ -22,14 +22,6 @@ public class Resource implements Serializable {
 	
 	private String osType;
 	
-	private int useSsh;
-	
-	private int sshPort;
-	
-	private int useRdp;
-	
-	private int rdpPort;
-	
 	private int networkId;
 	
 	private String networkName;
@@ -84,38 +76,6 @@ public class Resource implements Serializable {
 
 	public void setOsType(String osType) {
 		this.osType = osType;
-	}
-
-	public int getUseSsh() {
-		return useSsh;
-	}
-
-	public void setUseSsh(int useSsh) {
-		this.useSsh = useSsh;
-	}
-
-	public int getSshPort() {
-		return sshPort;
-	}
-
-	public void setSshPort(int sshPort) {
-		this.sshPort = sshPort;
-	}
-
-	public int getUseRdp() {
-		return useRdp;
-	}
-
-	public void setUseRdp(int useRdp) {
-		this.useRdp = useRdp;
-	}
-
-	public int getRdpPort() {
-		return rdpPort;
-	}
-
-	public void setRdpPort(int rdpPort) {
-		this.rdpPort = rdpPort;
 	}
 
 	public int getNetworkId() {

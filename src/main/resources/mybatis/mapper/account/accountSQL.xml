@@ -8,19 +8,26 @@
 		<result property="account" 			column="account"/>
 		<result property="password" 		column="password"/>
 		<result property="type" 			column="type"/>
-		<result property="resourceId" 		column="resource_id"/>
-		<result property="serverType" 		column="server_type"/>
 	</resultMap>
 	<select id="query" parameterType="int" resultMap="accountResult">
 		<![CDATA[
 			SELECT
-			  `id`,
-			  `account`,
-			  `password`,
-			  `type`,
-			  `resource_id`,
-			  `server_type`
-			FROM `account` WHERE `resource_id` = #{resourceId}
+			  a.`id`,
+			  a.`account`,
+			  a.`password`,
+			  a.`type`
+			FROM `account` a,`rel_server_account` rsa WHERE a.`id` = rsa.`account_id` AND rsa.`server_id` = #{serverId}
+		]]>
+	</select>
+	<select id="queryByAccountAndServerId" parameterType="java.util.HashMap" resultMap="accountResult">
+		<![CDATA[
+			SELECT
+			  a.`id`,
+			  a.`account`,
+			  a.`password`,
+			  a.`type`
+			FROM `account` a,`rel_server_account` rsa WHERE a.`id` = rsa.`account_id` 
+			AND rsa.`server_id` = #{serverId} AND a.`account` = #{account} LIMIT 1
 		]]>
 	</select>
 	<insert id="insert" parameterType="account">
@@ -28,14 +35,10 @@
 			INSERT INTO `account`
             (`account`,
              `password`,
-             `type`,
-             `resource_id`,
-			 `server_type`)
+             `type`)
 			VALUES (#{account},
 			        #{password},
-			        #{type},
-			        #{resourceId},
-			        #{serverType})
+			        #{type})
 		]]>
 		<selectKey keyProperty="id" resultType="java.lang.Integer">
 			<![CDATA[
@@ -58,4 +61,20 @@
 			DELETE FROM `account` WHERE `id` = #{id}
 		]]>
 	</delete>
+	<delete id="deleteRel" parameterType="java.util.HashMap">
+		<![CDATA[
+			DELETE FROM `new_resource`.`rel_server_account`
+			WHERE `server_id` = #{serverId} AND `account_id` = #{accountId}
+		]]>
+	</delete>
+	<insert id="insertRel" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO `rel_server_account` (`server_id`, `account_id`) VALUES (#{serverId}, #{accountId})
+		]]>
+	</insert>
+	<select id="countRel" parameterType="java.util.HashMap" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM `rel_server_account` WHERE `server_id` = #{serverId} AND `account_id` = #{accountId}
+		]]>
+	</select>
 </mapper>

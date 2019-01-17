@@ -1,6 +1,9 @@
 package com.bugbycode.service.account.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +19,8 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDao accountDao;
 	
 	@Override
-	public List<Account> query(int resId) {
-		return accountDao.query(resId);
+	public List<Account> query(int serverId) {
+		return accountDao.query(serverId);
 	}
 
 	@Override
@@ -40,30 +43,23 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account checkAccount(List<Account> list, Account acc) {
-		if(list == null || list.isEmpty()) {
-			return null;
-		}
-		for(Account a : list) {
-			if(a.getAccount().equals(acc.getAccount()) 
-					&& a.getServerType() == acc.getServerType()) {
-				return a;
-			}
-		}
-		return null;
+	public int countRel(int accId, int serverId) {
+		return accountDao.countRel(accId, serverId);
 	}
-	
+
 	@Override
-	public Account findById(List<Account> list,int accId) {
-		if(list == null || list.isEmpty()) {
-			return null;
-		}
-		for(Account a : list) {
-			if(a.getId() == accId) {
-				return a;
-			}
-		}
-		return null;
+	public void insertRel(int accId, int serverId) {
+		accountDao.insertRel(accId, serverId);
+	}
+
+	@Override
+	public void deleteRel(int accId, int serverId) {
+		accountDao.deleteRel(accId, serverId);
+	}
+
+	@Override
+	public Account queryByAccountAndServerId(String account, int serverId) {
+		return accountDao.queryByAccountAndServerId(account, serverId);
 	}
 
 }

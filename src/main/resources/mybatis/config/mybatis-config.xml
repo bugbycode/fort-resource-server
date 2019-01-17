@@ -12,5 +12,6 @@
 		<typeAlias alias="account" type="com.bugbycode.module.account.Account"/>
 		<typeAlias alias="network" type="com.bugbycode.module.network.Network"/>
 		<typeAlias alias="resource" type="com.bugbycode.module.resource.Resource"/>
+		<typeAlias alias="resourceServer" type="com.bugbycode.module.resource_server.ResourceServer"/>
 	</typeAliases>
 </configuration>

@@ -10,10 +10,6 @@
 		<result property="status" 			column="status"/>
 		<result property="type" 			column="type"/>
 		<result property="osType" 			column="os_type"/>
-		<result property="useSsh" 			column="use_ssh"/>
-		<result property="sshPort" 			column="ssh_port"/>
-		<result property="useRdp" 			column="use_rdp"/>
-		<result property="rdpPort" 			column="rdp_port"/>
 		<result property="networkId" 		column="network_id"/>
 		<result property="networkName" 		column="network_name"/>
 		<result property="createTime" 		column="create_time"/>
@@ -28,10 +24,6 @@
 			  r.`status`,
 			  r.`type`,
 			  r.`os_type`,
-			  r.`use_ssh`,
-			  r.`ssh_port`,
-			  r.`use_rdp`,
-			  r.`rdp_port`,
 			  r.`network_id`,
 			  n.`name` AS network_name,
 			  r.`create_time`,
@@ -71,10 +63,6 @@
 			  r.`status`,
 			  r.`type`,
 			  r.`os_type`,
-			  r.`use_ssh`,
-			  r.`ssh_port`,
-			  r.`use_rdp`,
-			  r.`rdp_port`,
 			  r.`network_id`,
 			  n.`name` AS network_name,
 			  r.`create_time`,
@@ -91,10 +79,6 @@
 			  r.`status`,
 			  r.`type`,
 			  r.`os_type`,
-			  r.`use_ssh`,
-			  r.`ssh_port`,
-			  r.`use_rdp`,
-			  r.`rdp_port`,
 			  r.`network_id`,
 			  n.`name` AS network_name,
 			  r.`create_time`,
@@ -111,10 +95,6 @@
 			  r.`status`,
 			  r.`type`,
 			  r.`os_type`,
-			  r.`use_ssh`,
-			  r.`ssh_port`,
-			  r.`use_rdp`,
-			  r.`rdp_port`,
 			  r.`network_id`,
 			  n.`name` AS network_name,
 			  r.`create_time`,
@@ -131,10 +111,6 @@
 			  r.`status`,
 			  r.`type`,
 			  r.`os_type`,
-			  r.`use_ssh`,
-			  r.`ssh_port`,
-			  r.`use_rdp`,
-			  r.`rdp_port`,
 			  r.`network_id`,
 			  n.`name` AS network_name,
 			  r.`create_time`,
@@ -150,10 +126,6 @@
              `status`,
              `type`,
              `os_type`,
-             `use_ssh`,
-             `ssh_port`,
-             `use_rdp`,
-             `rdp_port`,
         ]]>
         <if test="networkId != 0">
 	        <![CDATA[
@@ -167,10 +139,6 @@
 			        #{status},
 			        #{type},
 			        #{osType},
-			        #{useSsh},
-			        #{sshPort},
-			        #{useRdp},
-			        #{rdpPort},
 		]]>
 		<if test="networkId != 0">
         	<![CDATA[
@@ -195,10 +163,6 @@
 			  `status` = #{status},
 			  `type` = #{type},
 			  `os_type` = #{osType},
-			  `use_ssh` = #{useSsh},
-			  `ssh_port` = #{sshPort},
-			  `use_rdp` = #{useRdp},
-			  `rdp_port` = #{rdpPort},
 		]]>
 		<if test="networkId != 0">
         	<![CDATA[

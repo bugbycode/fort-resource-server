@@ -6,7 +6,9 @@ import com.bugbycode.module.account.Account;
 
 public interface AccountService {
 	
-	public List<Account> query(int resId);
+	public List<Account> query(int serverId);
+	
+	public Account queryByAccountAndServerId(String account,int serverId);
 	
 	public int insert(Account acc);
 	
@@ -14,7 +16,9 @@ public interface AccountService {
 	
 	public void delete(int accId);
 	
-	public Account checkAccount(List<Account> list,Account acc);
+	public int countRel(int accId,int serverId); 
 	
-	public Account findById(List<Account> list,int accId);
+	public void insertRel(int accId,int serverId);
+	
+	public void deleteRel(int accId,int serverId);
 }

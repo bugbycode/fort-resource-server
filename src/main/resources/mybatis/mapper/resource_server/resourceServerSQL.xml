@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resourceServer">
+	<resultMap type="resourceServer" id="serverResult">
+		<result property="id" 			column="id"/>
+		<result property="serverType" 	column="server_type"/>
+		<result property="port" 		column="port"/>
+		<result property="dbName" 		column="db_name"/>
+		<result property="resId" 		column="res_id"/>
+		<result property="use" 			column="use"/>
+	</resultMap>
+	<select id="query" parameterType="int" resultMap="serverResult">
+		<![CDATA[
+			SELECT
+			  `id`,
+			  `server_type`,
+			  `port`,
+			  `db_name`,
+			  `res_id`,
+			  `use`
+			FROM `resource_server` WHERE `res_id` = #{resId}
+		]]>
+	</select>
+	<insert id="insert" parameterType="resourceServer">
+		<![CDATA[
+			INSERT INTO `resource_server`
+            (`server_type`,
+             `port`,
+             `db_name`,
+             `res_id`,
+             `use`)
+			VALUES (#{serverType},
+			        #{port},
+			        #{dbName},
+			        #{resId},
+			        #{use})
+		]]>
+	</insert>
+	<update id="update" parameterType="resourceServer">
+		<![CDATA[
+			UPDATE `resource_server`
+			SET
+			  `port` = #{port},
+			  `db_name` = #{dbName},
+			  `use` = #{use}
+			WHERE `id` = #{id}
+		]]>
+	</update>
+	<select id="queryByTypeAndResId" parameterType="java.util.HashMap" resultMap="serverResult">
+		<![CDATA[
+			SELECT
+			  `id`,
+			  `server_type`,
+			  `port`,
+			  `db_name`,
+			  `res_id`,
+			  `use`
+			FROM `resource_server` WHERE `res_id` = #{resId} AND `server_type` = #{serverType} LIMIT 1
+		]]>
+	</select>
+</mapper>

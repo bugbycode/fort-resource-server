@@ -150,6 +150,16 @@ public class ResourceController {
 		int code = 0;
 		String msg = "修改成功";
 		try {
+			
+			if(resId <= 0) {
+				throw new RuntimeException("资源ID错误");
+			}
+			
+			Resource res = resourceService.queryById(resId);
+			if(res == null) {
+				throw new RuntimeException("资源ID错误");
+			}
+			
 			if(!RegexUtil.check(RegexUtil.RESOURCE_NAME_REGEX, name)) {
 				throw new RuntimeException("资源名称格式错误");
 			}
