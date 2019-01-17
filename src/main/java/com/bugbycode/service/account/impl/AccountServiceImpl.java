@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
 				if(StringUtil.isNotEmpty(password)) {
 					password = AESUtil.decrypt(password);
 				}
-				acc.setAccount(password);
+				acc.setPassword(password);
 			}
 		}
 		return list;
