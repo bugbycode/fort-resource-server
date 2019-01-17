@@ -51,7 +51,13 @@
 			UPDATE `account`
 			SET
 			  `account` = #{account},
+		]]>
+		<if test="password != null and password != ''">
+			<![CDATA[
 			  `password` = #{password},
+			]]>
+		</if>
+		<![CDATA[
 			  `type` = #{type}
 			WHERE `id` = #{id}
 		]]>

@@ -1,16 +1,17 @@
 package com.bugbycode.service.account.impl;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.bugbycode.dao.account.AccountDao;
 import com.bugbycode.module.account.Account;
 import com.bugbycode.service.account.AccountService;
+import com.util.AESUtil;
+import com.util.StringUtil;
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -20,7 +21,17 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public List<Account> query(int serverId) {
-		return accountDao.query(serverId);
+		List<Account> list = accountDao.query(serverId);
+		if(!CollectionUtils.isEmpty(list)) {
+			for(Account acc : list) {
+				String password = acc.getPassword();
+				if(StringUtil.isNotEmpty(password)) {
+					password = AESUtil.decrypt(password);
+				}
+				acc.setAccount(password);
+			}
+		}
+		return list;
 	}
 
 	@Override
@@ -59,7 +70,15 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account queryByAccountAndServerId(String account, int serverId) {
-		return accountDao.queryByAccountAndServerId(account, serverId);
+		Account acc = accountDao.queryByAccountAndServerId(account, serverId);
+		if(acc != null) {
+			String password = acc.getPassword();
+			if(StringUtil.isNotEmpty(password)) {
+				password = AESUtil.decrypt(password);
+			}
+			acc.setAccount(password);
+		}
+		return acc;
 	}
 
 }
