@@ -34,7 +34,7 @@
 			</if>
 			<if test="name != '' and name != null">
 				<![CDATA[
-					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+					AND (`name` LIKE CONCAT('%',#{name},'%'))
 				]]>
 			</if>
 		</where>
@@ -51,7 +51,7 @@
 			</if>
 			<if test="name != '' and name != null">
 				<![CDATA[
-					AND (`name` LIKE CONCAT('%',#{keyword},'%'))
+					AND (`name` LIKE CONCAT('%',#{name},'%'))
 				]]>
 			</if>
 		</where>
