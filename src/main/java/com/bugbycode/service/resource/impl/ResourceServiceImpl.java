@@ -1,6 +1,7 @@
 package com.bugbycode.service.resource.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +64,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public int insert(Resource r) {
+		r.setCreateTime(new Date());
 		int row = resourceDao.insert(r);
 		if(row > 0) {
 			return r.getId();
@@ -72,6 +74,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public int update(Resource r) {
+		r.setUpdateTime(new Date());
 		return resourceDao.update(r);
 	}
 

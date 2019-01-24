@@ -129,8 +129,8 @@ public class AccountController {
 		String msg = "删除成功";
 		try {
 			accountService.deleteRel(accId, serverId);
-			int count = accountService.countRel(accId, serverId);
-			if(count == 0) {
+			Account acc = accountService.queryById(accId);
+			if(acc == null) {
 				accountService.delete(accId);
 			}
 		}catch (Exception e) {

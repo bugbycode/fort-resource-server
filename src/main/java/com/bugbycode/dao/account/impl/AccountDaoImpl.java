@@ -17,6 +17,11 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 	public List<Account> query(int serverId) {
 		return getSqlSession().selectList("account.query", serverId);
 	}
+	
+	@Override
+	public Account queryById(int accountId) {
+		return getSqlSession().selectOne("account.queryById", accountId);
+	}
 
 	@Override
 	public Account queryByAccountAndServerId(String account,int serverId) {

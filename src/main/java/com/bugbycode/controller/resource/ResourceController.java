@@ -6,15 +6,20 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bugbycode.module.account.Account;
 import com.bugbycode.module.network.Network;
 import com.bugbycode.module.resource.Resource;
+import com.bugbycode.module.resource_server.ResourceServer;
+import com.bugbycode.service.account.AccountService;
 import com.bugbycode.service.network.NetworkService;
 import com.bugbycode.service.resource.ResourceService;
+import com.bugbycode.service.resource_server.ResourceServerService;
 import com.util.StringUtil;
 import com.util.page.SearchResult;
 import com.util.reg.RegexUtil;
@@ -25,6 +30,12 @@ public class ResourceController {
 
 	@Autowired
 	private ResourceService resourceService;
+	
+	@Autowired
+	private ResourceServerService resourceServerService;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	@Autowired
 	private NetworkService networkService;
@@ -201,6 +212,24 @@ public class ResourceController {
 			Resource r = resourceService.queryById(resId);
 			if(r == null) {
 				throw new RuntimeException("该资产信息不存在");
+			}
+			List<ResourceServer> serverList = resourceServerService.query(resId);
+			if(!CollectionUtils.isEmpty(serverList)) {
+				int serverId = 0;
+				int accId = 0;
+				for(ResourceServer server : serverList) {
+					serverId = server.getId();
+					List<Account> accList = accountService.query(serverId);
+					if(!CollectionUtils.isEmpty(accList)) {
+						for(Account acc : accList) {
+							accId = acc.getId();
+							accountService.deleteRel(accId, serverId);
+							if(accountService.queryById(accId) == null) {
+								accountService.delete(accId);
+							}
+						}
+					}
+				}
 			}
 			resourceService.delete(resId);
 		}catch (Exception e) {

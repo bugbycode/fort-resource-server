@@ -37,6 +37,11 @@
 			        #{resId},
 			        #{use})
 		]]>
+		<selectKey keyProperty="id" resultType="java.lang.Integer">
+			<![CDATA[
+				SELECT @@IDENTITY AS id
+			]]>
+		</selectKey>
 	</insert>
 	<update id="update" parameterType="resourceServer">
 		<![CDATA[

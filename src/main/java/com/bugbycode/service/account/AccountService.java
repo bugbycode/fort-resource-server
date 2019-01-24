@@ -8,6 +8,8 @@ public interface AccountService {
 	
 	public List<Account> query(int serverId);
 	
+	public Account queryById(int accountId);
+	
 	public Account queryByAccountAndServerId(String account,int serverId);
 	
 	public int insert(Account acc);

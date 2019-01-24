@@ -1,6 +1,5 @@
 package com.bugbycode.service.account.impl;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,11 @@ public class AccountServiceImpl implements AccountService {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public Account queryById(int accountId) {
+		return accountDao.queryById(accountId);
 	}
 
 	@Override

@@ -62,6 +62,7 @@ public class ResourceServerController {
 		JSONObject json = new JSONObject();
 		json.put("msg", msg);
 		json.put("code", code);
+		json.put("serverId", server.getId());
 		return json.toJSONString();
 	}
 }
