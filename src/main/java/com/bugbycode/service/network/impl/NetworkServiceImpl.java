@@ -1,6 +1,7 @@
 package com.bugbycode.service.network.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,7 @@ public class NetworkServiceImpl implements NetworkService {
 
 	@Override
 	public int insert(Network network) {
+		network.setCreateTime(new Date());
 		int row = networkDao.insert(network);
 		if(row > 0) {
 			return network.getId();
@@ -62,6 +64,7 @@ public class NetworkServiceImpl implements NetworkService {
 
 	@Override
 	public int update(Network network) {
+		network.setUpdateTime(new Date());
 		return networkDao.update(network);
 	}
 
