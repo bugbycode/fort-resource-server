@@ -39,7 +39,9 @@ public class AuthResourceConfig extends ResourceServerConfigurerAdapter {
         .antMatchers("/resource/query","/resource/queryById","/resource/queryByName",
         		"/resource/queryByIp","/resource/queryNetWork","/account/query","/resourceServer/query")
         	.hasAnyRole("RESOURCE_QUERY","RESOURCE_UPDATE",
-        		"RESOURCE_INSERT","RESOURCE_DELETE")
+        		"RESOURCE_INSERT","RESOURCE_DELETE",
+        		"RULE_QUERY","RULE_UPDATE",
+        		"RULE_INSERT","RULE_DELETE")
         	
         .antMatchers("/account/insert","/account/insertRel","/resourceServer/insert",
         		"/account/update","/account/delete").hasAnyRole("RESOURCE_UPDATE",
