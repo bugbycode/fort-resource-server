@@ -54,6 +54,9 @@ public class AuthResourceConfig extends ResourceServerConfigurerAdapter {
         
         .antMatchers("/network/query","/network/queryByName","/network/queryById")
         	.hasAnyRole("NETWORK_QUERY","NETWORK_UPDATE","NETWORK_INSERT","NETWORK_DELETE")
+        	
+        //API权限
+        .antMatchers("/api/*").hasRole("ADMIN")
         ;
     }
 }
